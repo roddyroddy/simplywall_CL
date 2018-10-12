@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+        .left, .right{
+            display: inline-block;
+            vertical-align: top;
+            margin: 10px 100px 0px 100px;
+
+        }
+        .comment{
+            margin-left: 50px;
+        }
+    
+    </style>
+
+    <title>Home!</title>
+</head>
+<body class="container">
+    
+    <h2>Welcome, {{session['first_name']}}!</h2>
+    <a href="/logout">Sign Out</a><br><hr>
+
+    <div class="left">
+            <h3>There are ({{messages|length}}) messages for you, {{session['first_name']}}!</h3><br>
+
+            {% for j in messages%}
+            <h5>{{j['first_name']}} said on ({{j['created_at']}}):</h5>
+            <p>{{j['message_body']}}</p>
+
+                {% for x in commentz %}
+                {% if x['user_id'] == j['message_id'] %}
+                <p class='comment'>{{ x.text }}</p>
+                {% endif %}
+                {% endfor %}
+            <form action="/comment" method="post">
+                <label>Comment</label><br>
+                <textarea cols="25" name="comment_body" rows="4"></textarea>
+                <input type="hidden" value="{{ j['message_id'] }}" name='message_id'>
+                <input type="submit" value="Submit">
+            </form>
+
+            <a href="/delete/{{j['message_id']}}">DELETE</a><br><br>
+            {% endfor %}
+    
+
+    </div>
+    <div class="right">
+        <h3>You have sent ({{counter[0]['count']}}) messages</h3>
+        <br>
+        {% for i in friends %}
+        <form action="/messages" method="post">
+                <label>{{i['first_name']}}</label><br>
+                <textarea cols="25" name="comments" rows="4"></textarea>
+                <input type="hidden" value="{{ i['id'] }}" name='receiver_id'>
+                <input type="submit" value="Submit">
+        </form>
+        {% endfor %}
+
+
+
+
+
+
+    </div>
+
+
+
+
+
+
+</body>
+</html>

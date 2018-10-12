@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  
+
+    <title>Simple Wall </title>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to Simple Wall!</h1>
+
+        <h2>Register:</h2>
+        <form action='/register' method='post' class="form-inline">
+            <p>First Name: <input class="form-control" type="text" name="first_name"> </p>
+            <p>Last Name: <input class=" form-control"type="text" name="last_name"> </p>
+            <p>Email: <input class="form-control"type="text" name="email"> </p>
+            <p>Password: <input class="form-control"type="password" name="password"> </p>
+            <p>Confirm Password: <input class="form-control"type="password" name="confirm"> </p>
+            <p><input type="submit" class="btn btn-primary" value="Submit"> </p>
+        </form>
+        {% with messages = get_flashed_messages(category_filter=['reg']) %}
+            {% if messages %}
+                {% for message in messages %}
+                    <p style="color: red">{{  message  }}</p>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <hr>
+        <br>
+        <h2>Log In:</h2>
+        <form action='/login'class="form-inline" method='post'>
+            <p>Email: <input class="form-control"type="text" name="login_email"> </p>
+            <p>Password: <input class="form-control"type="password" name="login_password"> </p>
+            <p><input type="submit" class="btn btn-primary" value="Submit"> </p>
+        </form>
+      
+        {% with messages = get_flashed_messages(category_filter=['login']) %}
+            {% if messages %}
+                {% for message in messages %}
+                  <p style="color: red">**{{  message  }}**</p>
+                 {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+
+
+    </div>
+
+
+    
+</body>
+</html>
